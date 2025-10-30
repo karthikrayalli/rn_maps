@@ -15,6 +15,10 @@ if linkage != nil
 end
 
 target 'RNMaps' do
+  # React Native Maps dependencies (per docs)
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-maps/Google', :path => rn_maps_path
+
   config = use_native_modules!
 
   use_react_native!(
@@ -22,6 +26,8 @@ target 'RNMaps' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+
+  # Google pods are brought transitively by react-native-maps/Google
 
   post_install do |installer|
     react_native_post_install(
